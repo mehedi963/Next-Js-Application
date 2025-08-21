@@ -4,7 +4,7 @@ import alert from 'daisyui/components/alert';
 import React, { useState } from 'react';
 
 export default function AddProductForm(props) {
-// const [form, setForm] = useState({ name: "", img: "", description: "", price: "" });
+
     const handleSubmit = async (e)=>{
         e.preventDefault();
         const form = e.target;

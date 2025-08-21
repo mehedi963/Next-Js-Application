@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export default async function ProductsSection() {
-    const data = await dbConnect('products').find().limit(3).toArray();
+    const data = await dbConnect('products').find() .sort({ _id: -1 }) .limit(3).toArray();
     return (
         <div>
             <h1 className='text-center font-bold text-3xl py-4'>Products Highlights</h1>
@@ -18,8 +18,8 @@ export default async function ProductsSection() {
                                     <Image src={item.img} width={314} height={208} alt='null'></Image>
                                 </figure>
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title">Card Title</h2>
-                                    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                                    <h2 className="card-title">{item.title}</h2>
+                                    <p>Price : {item.price}</p>
                                     <div className="card-actions">
                                         <Link href={`/products/${item._id}`}><button className="btn btn-primary">View details</button></Link>
                                     </div>
