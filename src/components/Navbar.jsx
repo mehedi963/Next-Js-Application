@@ -1,14 +1,18 @@
+"use client"
+
 import Link from 'next/link';
 import React from 'react';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Navbar() {
-    
-    const navMenu = ()=> {
+    const { data: session } = useSession()
+    // console.log(data);
+    const navMenu = () => {
 
         return (<>
-        <li><Link href={'/'}>Home</Link></li>
-        <li><Link href={'/products'}>Product Highlights</Link></li>
-        <li><Link href={'/dashboard/add-product'}>Add Product</Link></li>
+            <li><Link href={'/'}>Home</Link></li>
+            <li><Link href={'/products'}>Product Highlights</Link></li>
+            <li><Link href={'/dashboard/add-product'}>Add Product</Link></li>
         </>
         )
     }
@@ -32,12 +36,43 @@ export default function Navbar() {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                            {navMenu()}
-                        </ul>
+                        {navMenu()}
+                    </ul>
                 </div>
                 <div className="navbar-end gap-5">
-                    <Link href={'/login'}><button className="btn btn-secondary">Login</button></Link>
-                    <Link href={'/register'}><button className="btn btn-secondary">Register</button></Link>
+
+                    {!session ? (
+                        <>
+                        <button
+                            onClick={() => signIn()}
+                            className="px-6 py-2 font-semibold rounded bg-violet-600 text-white"
+                        >
+                            Login
+                        </button>
+                        <Link href={'/register'}><button className="btn btn-secondary">Register</button></Link>
+                        </>
+                    ) : (
+                        <>
+                            {/* Logged in user info */}
+                            <span className="flex items-center space-x-2">
+                                <img
+                                    src={session.user.image}
+                                    alt="profile"
+                                    className="w-8 h-8 rounded-full"
+                                />
+                                <span className="font-medium">{session.user.name}</span>
+                            </span>
+                            <button
+                                onClick={() => signOut()}
+                                className="px-6 py-2 font-semibold rounded bg-red-500 text-white"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    )}
+
+                    {/* <Link href={'/login'}><button className="btn btn-secondary">Login</button></Link>
+                    <Link href={'/register'}><button className="btn btn-secondary">Register</button></Link> */}
                 </div>
             </div>
         </div>
