@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Next.js Product App
 
-## Getting Started
+## 📌 Short Description
+A simple application built with **Next.js 15 (App Router)** and **NextAuth.js** that demonstrates public and protected routes with basic authentication.  
+Users can view a landing page, browse products, see product details, and after logging in, access a protected dashboard to add new products.
 
-First, run the development server:
+---
 
+## 🔗 Links
+- **Live Site (Vercel):** [Your Live Site Here](https://your-project.vercel.app)  
+
+---
+
+## ⚙️ Setup & Installation 
+
+### 1️⃣ Clone the Repository
 ```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+2️⃣ Install Dependencies
+bash
+Copy
+Edit
+npm install
+3️⃣ Create Environment Variables
+Create a .env.local file in the root folder. Example:
+
+ini
+Copy
+Edit
+NEXTAUTH_SECRET=your-secret
+NEXTAUTH_URL=http://localhost:3000
+
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+DATABASE_URL=your-database-url-or-json-file
+4️⃣ Run the Project
+Start development server:
+
+bash
+Copy
+Edit
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Now open http://localhost:3000 🎉
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📍 Route Summary
+🔹 Public Routes
+/ → Landing Page (Navbar, Hero, Product Highlights, Footer)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+/login → Login Page (NextAuth with Google or credentials)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+/products → Product List Page (shows all products)
 
-## Learn More
+/products/[id] → Product Details Page
 
-To learn more about Next.js, take a look at the following resources:
+🔹 Protected Routes
+/dashboard/add-product → Add Product Page
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Requires authentication
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Redirects unauthenticated users to /login
 
-## Deploy on Vercel
+Provides a form to add products to the database
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🔹 API Routes (via Route Handlers /api)
+GET /api/products → Fetch all products
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GET /api/products/[id] → Fetch single product
+
+POST /api/products → Add new product (protected)
+
+🛠️ Tech Stack
+Framework: Next.js 15 (App Router)
+
+Authentication: NextAuth.js
+
+Database: Mock JSON or Prisma with SQLite/MongoDB
+
+Styling: Tailwind CSS
+
+Deployment: Vercel
